@@ -7,8 +7,8 @@ const mongoose = require('mongoose')
 
 
 // router imports
-const usersRouter = require('./routes/users');
-
+const usersRouter = require('./routes/users')
+const stallRouter = require('./routes/stalls')
 
 // env config
 env.config()
@@ -28,6 +28,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // routers
-app.use('/users', usersRouter);
+app.use('/users', usersRouter)
+app.use('/stalls', stallRouter)
 
 module.exports = app;
