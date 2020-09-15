@@ -5,13 +5,13 @@ const logger = require('morgan');
 const env = require('dotenv')
 const mongoose = require('mongoose')
 
+// env config
+env.config()
 
 // router imports
 const usersRouter = require('./routes/users')
 const stallRouter = require('./routes/stalls')
 
-// env config
-env.config()
 
 // db
 const url = "mongodb://localhost:27017/food_db"
@@ -19,7 +19,6 @@ const connect = mongoose.connect(url, {useNewUrlParser: true, useFindAndModify: 
 connect.then(db => console.log("Connected to db successfully")).catch(err=> console.log(err))
 
 const app = express();
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
