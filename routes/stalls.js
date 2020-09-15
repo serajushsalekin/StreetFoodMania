@@ -1,11 +1,12 @@
 const express = require('express')
 const stallRouter = express.Router()
+const cors = require('./cors')
 
 const Stall = require('../models/Stall')
-stallRouter.use(express.json())
 
 stallRouter.route('/')
-.get((req, res, next) => {
+.options(cors.cors, (req, res) => { res.sendStatus(200); })
+.get(cors.corsWithOptions, (req, res, next) => {
     Stall.find({}, (err, stall)=> {
         if (err) return res.status(400).json({message: err})
         return res.status(200).json(stall)
