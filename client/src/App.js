@@ -3,6 +3,8 @@ import axios from 'axios'
 import './App.css'
 import Navbar from "./components/navbar";
 import {BrowserRouter as Router} from "react-router-dom";
+import Stalls from './components/stalls'
+
 
 class App extends Component{
   componentDidMount() {
@@ -14,6 +16,7 @@ class App extends Component{
       return (
           <Router>
               <Navbar/>
+              <Stalls />
           </Router>
 
     )
