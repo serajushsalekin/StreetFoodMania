@@ -18,7 +18,7 @@ stallRouter.route('/')
         }
     }
 
-    Stall.find(option, (err, stall)=> {
+    Stall.find({}, (err, stall)=> {
         if (err) return res.status(400).json({message: err})
         return res.status(200).json(stall)
     })
@@ -30,5 +30,16 @@ stallRouter.route('/')
         res.status(201).json(stall)
     }, err => next(err)).catch(err => next(err))
 })
-
+stallRouter.route('/:id')
+.options(cors.cors, (req, res) => { res.sendStatus(200); })
+.get(cors.corsWithOptions, (req, res, next) => {
+    const id = req.params.id
+    // Stall.find({_id: id}, (err, stall)=> {
+    //     if (err) return res.status(400).json({message: "Stall not exists!"})
+    //     return res.status(200).json({stall})
+    // })
+    Stall.findOne({_id: id}).then(stall=> {
+        return res.status(200).json(stall)
+    })
+})
 module.exports = stallRouter

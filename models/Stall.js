@@ -31,7 +31,7 @@ const stallSchema = new Schema({
             }
         }
     ],
-    location: {
+    loc_: {
         type: {
             type: String,
             enum: ['Point'],

@@ -2,84 +2,44 @@ import React, {Component} from "react"
 import "../static/css/stalls.css"
 import bg1 from '../static/img/brownie-dessert-cake-sweet-45202.jpeg'
 import {Link} from "react-router-dom";
-import bg2 from '../static/img/pexels-photo-307008.jpeg'
+import {connect} from 'react-redux'
+import {fetchStalls} from "../redux/stall/stallAction";
 
 
 class Stalls extends Component{
+    componentDidMount() {
+        this.props.fetchStalls()
+    }
+
     render() {
+        const items = this.props.items.stalls
         return (
 <div className='container'>
 <section className="cards">
-    <article className="card card--1">
-        <div className="card__info-hover">
-            <div className="card__clock-info">
+    { items.length > 0 ? items.map(item =>
+        <article className="card card--1" key={item._id}>
+            <div className="card__info-hover">
+                <div className="card__clock-info">
+                </div>
             </div>
-        </div>
-        <div className="card__img" style={{backgroundImage: `url(${bg1})`}}>
-        </div>
-        <Link to="#" className="card_link">
-            <div className="card__img--hover" style={{backgroundImage: `url(${bg1})`}}>
+            <div className="card__img" style={{backgroundImage: `url(${bg1})`}}>
             </div>
-        </Link>
-        <div className="card__info">
-            <h3 className="card__title">Crisp Spanish tortilla Matzo brei</h3>
-        </div>
-    </article>
-
-{/*demo*/}
-    <article className="card card--1">
-        <div className="card__info-hover">
-            <div className="card__clock-info">
+            <Link to={`stalls/${item._id}`} className="card_link">
+                <div className="card__img--hover" style={{backgroundImage: `url(${bg1})`}}>
+                </div>
+            </Link>
+            <div className="card__info">
+                <h3 className="card__title">{item.name}</h3>
             </div>
-        </div>
-        <div className="card__img" style={{backgroundImage: `url(${bg2})`}}>
-        </div>
-        <Link to="#" className="card_link">
-            <div className="card__img--hover" style={{backgroundImage: `url(${bg2})`}}>
-            </div>
-        </Link>
-        <div className="card__info">
-            <h3 className="card__title">Crisp Spanish tortilla Matzo brei</h3>
-        </div>
-    </article>
-    <article className="card card--1">
-        <div className="card__info-hover">
-            <div className="card__clock-info">
-            </div>
-        </div>
-        <div className="card__img" style={{backgroundImage: `url(${bg1})`}}>
-        </div>
-        <Link to="#" className="card_link">
-            <div className="card__img--hover" style={{backgroundImage: `url(${bg1})`}}>
-            </div>
-        </Link>
-        <div className="card__info">
-            <h3 className="card__title">Crisp Spanish tortilla Matzo brei</h3>
-        </div>
-    </article>
-    <article className="card card--1">
-        <div className="card__info-hover">
-            <div className="card__clock-info">
-            </div>
-        </div>
-        <div className="card__img" style={{backgroundImage: `url(${bg2})`}}>
-        </div>
-        <Link to="#" className="card_link">
-            <div className="card__img--hover" style={{backgroundImage: `url(${bg2})`}}>
-            </div>
-        </Link>
-        <div className="card__info">
-            <h3 className="card__title">Crisp Spanish tortilla Matzo brei</h3>
-        </div>
-    </article>
-
-{/*demo end*/}
-
-
+        </article>
+    ) : ""}
 </section>
 </div>
         )
     }
 }
 
-export default Stalls
+const mapStateToProps = state => ({
+    items: state.stalls
+})
+export default connect(mapStateToProps, {fetchStalls})(Stalls)

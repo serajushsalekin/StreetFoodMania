@@ -1,0 +1,1 @@
+export const fetchStallUrl = 'http://localhost:5000/stalls/'

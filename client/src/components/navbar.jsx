@@ -20,7 +20,7 @@ const Navbar = () => {
                             <Link className="dropdown-toggle" data-toggle="dropdown" to="#">More <span
                                 className="caret"> </span></Link>
                             <ul className="dropdown-menu">
-                                <li><Link to="#">Page 1-1</Link></li>
+                                <li><Link to="/stalls">Stall List</Link></li>
                                 <li><Link to="#">Page 1-2</Link></li>
                                 <li><Link to="#">Page 1-3</Link></li>
                             </ul>
