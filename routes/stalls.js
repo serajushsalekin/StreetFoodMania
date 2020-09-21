@@ -8,10 +8,10 @@ stallRouter.route('/')
 .options(cors.cors, (req, res) => { res.sendStatus(200); })
 .get(cors.corsWithOptions, (req, res, next) => {
     const option = {
-        location: {
+        loc_: {
             $geoWithin: {
                 $centerSphere: [
-                    [175.926385,-38.53851],
+                    [90.41473388671876, 23.84627791811337],
                     1.25 /3963.2
                 ]
             }
@@ -25,7 +25,7 @@ stallRouter.route('/')
 
 
 })
-.post((req, res, next) => {
+.post(cors.corsWithOptions, (req, res, next) => {
     Stall.create(req.body).then(stall=> {
         res.status(201).json(stall)
     }, err => next(err)).catch(err => next(err))
@@ -36,10 +36,10 @@ stallRouter.route('/:id')
     const id = req.params.id
     // Stall.find({_id: id}, (err, stall)=> {
     //     if (err) return res.status(400).json({message: "Stall not exists!"})
-    //     return res.status(200).json({stall})
+    //     return res.status(200).json(stall)
     // })
     Stall.findOne({_id: id}).then(stall=> {
         return res.status(200).json(stall)
-    })
+    }).catch(err => next(err))
 })
 module.exports = stallRouter

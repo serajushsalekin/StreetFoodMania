@@ -41,10 +41,10 @@ export const fetchStalls = () => {
     }
 }
 export const fetchStallDetail = id => {
-    return (dispatch) => {
-        dispatch(fetchStallRequest())
-        axios.get(`${fetchStallUrl}${id}`)
-            .then(res => {
+    return async (dispatch) => {
+        await dispatch(fetchStallRequest())
+        await axios.get(`${fetchStallUrl}${id}`)
+            .then( res => {
                 const stall = res.data
                 dispatch(fetchStall(stall))
             })

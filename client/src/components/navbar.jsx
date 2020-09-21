@@ -21,7 +21,7 @@ const Navbar = () => {
                                 className="caret"> </span></Link>
                             <ul className="dropdown-menu">
                                 <li><Link to="/stalls">Stall List</Link></li>
-                                <li><Link to="#">Page 1-2</Link></li>
+                                <li><Link to="/stalls/add">ADD Stall</Link></li>
                                 <li><Link to="#">Page 1-3</Link></li>
                             </ul>
                         </li>

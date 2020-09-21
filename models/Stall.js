@@ -38,7 +38,7 @@ const stallSchema = new Schema({
             required: true
         },
         coordinates: {
-            type:[Number],
+            type: [Number],
             index: '2dsphere',
             required: true
         }
