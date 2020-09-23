@@ -13,10 +13,7 @@ class AddStall extends Component{
     }
 
     addMarker = (e) => {
-        // const {markers} = this.state
-        //markers.push(e.latlng)
         const cord = [ e.latlng['lng'], e.latlng['lat']]
-        // console.log("cord",cord)
         this.setState({
             ...this.state,
             markers:  cord,

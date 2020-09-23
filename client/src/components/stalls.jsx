@@ -32,7 +32,7 @@ class Stalls extends Component{
                 <h3 className="card__title">{item.name}</h3>
             </div>
         </article>
-    ) : ""}
+    ) : <h3>No stalls available</h3>}
 </section>
 </div>
         )
