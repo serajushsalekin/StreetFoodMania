@@ -1,6 +1,7 @@
 const express = require('express')
 const stallRouter = express.Router()
 const cors = require('./cors')
+const { verifyUser } = require('../authenticate')
 
 const Stall = require('../models/Stall')
 
@@ -25,7 +26,7 @@ stallRouter.route('/')
 
 
 })
-.post(cors.corsWithOptions, (req, res, next) => {
+.post(cors.corsWithOptions, verifyUser, (req, res, next) => {
     Stall.create(req.body).then(stall=> {
         res.status(201).json(stall)
     }, err => next(err)).catch(err => next(err))
@@ -40,13 +41,13 @@ stallRouter.route('/:id')
         return res.status(200).json(stall)
     }).catch(err => next(err))
 })
-.put(cors.corsWithOptions, (req, res, next) => {
+.put(cors.corsWithOptions, verifyUser, (req, res, next) => {
     const id = req.params.id
     Stall.findByIdAndUpdate(id, { $set: req.body}, {new: true}).then(stall => {
         return res.status(200).json(stall)
     }, err=> next(err)).catch(err => next(err))
 })
-.delete(cors.corsWithOptions, (req, res, next) => {
+.delete(cors.corsWithOptions, verifyUser, (req, res, next) => {
     Stall.findByIdAndRemove(req.params.id).then(resp => {
         res.statusCode = 200
         res.setHeader('Content-Type', "application/json")
