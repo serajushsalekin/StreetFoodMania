@@ -7,8 +7,8 @@ import {fetchStalls} from "../redux/stall/stallAction";
 
 
 class Stalls extends Component{
-    componentDidMount() {
-        this.props.fetchStalls()
+    async componentDidMount() {
+        await this.props.fetchStalls()
     }
 
     render() {

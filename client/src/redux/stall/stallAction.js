@@ -30,9 +30,9 @@ export const fetchStallFailure = error => {
 }
 
 export const fetchStalls = () => {
-    return (dispatch) => {
-        dispatch(fetchStallRequest())
-        axios.get(fetchStallUrl)
+    return async (dispatch) => {
+        await dispatch(fetchStallRequest())
+        await axios.get(fetchStallUrl)
             .then(res => {
                 const stalls = res.data.map(stall=> stall)
                 dispatch(fetchStallSuccess(stalls))
