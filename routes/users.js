@@ -4,6 +4,7 @@ const passport = require('passport');
 const User = require('../models/User');
 const { Error } = require('mongoose');
 const authenticate = require('../authenticate')
+const cors = require('./cors')
 
 
 router.post('/signup', (req, res, next)=> {
@@ -38,7 +39,7 @@ router.post('/login', passport.authenticate('local'), (req, res, next)=> {
 
 })
 
-router.post('/logout', (req,res, next)=> {
+router.post('/logout', cors.corsWithOptions, (req,res, next)=> {
   if (req.session) {
     req.session.destroy()
     res.clearCookie('session-id')

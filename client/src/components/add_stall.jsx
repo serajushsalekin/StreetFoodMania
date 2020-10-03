@@ -1,7 +1,6 @@
 import React, {Component} from "react"
 import MyMap from "./map";
-import axios from 'axios'
-import {fetchStallUrl} from '../redux/api'
+import api from "../redux/api";
 
 
 class AddStall extends Component{
@@ -34,7 +33,7 @@ class AddStall extends Component{
             },
             name: this.state.name,
         }
-        axios.post(`${fetchStallUrl}`, stall).then(res => {
+        api.post(`/stalls`, stall).then(res => {
             if (res.status === 201) {
                 return this.props.history.push(`/stalls`)
             }

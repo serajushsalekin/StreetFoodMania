@@ -2,8 +2,7 @@ import React, {Component} from "react"
 import {fetchStallDetail} from "../redux/stall/stallAction";
 import {connect} from "react-redux"
 import MyMap from "./map";
-import axios from "axios";
-import {fetchStallUrl} from "../redux/api";
+import api from '../redux/api'
 
 
 class EditStall extends Component{
@@ -38,7 +37,7 @@ class EditStall extends Component{
     onUpdate = e => {
         e.preventDefault()
         const { match: { params } } = this.props
-        axios.put(`${fetchStallUrl}/${params.id}`, this.state).then(res => {
+        api.put(`/stalls/${params.id}`, this.state).then(res => {
             if (res.status === 200) {
                 return this.props.history.push(`/stalls/${res.data._id}`)
             }

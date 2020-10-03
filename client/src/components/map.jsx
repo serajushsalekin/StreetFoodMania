@@ -24,7 +24,7 @@ class MyMap extends React.Component {
                 />
                 <Marker position={this.props.loc || this.props.markers}>
                     <Popup>
-                        <span>lat {this.props.loc[0]} <br/> lng {this.props.loc[1]}</span>
+                        <span>lat {this.props.loc[1]} <br/> lng {this.props.loc[0]}</span>
                         {/*<span>lat {this.props.markers[0]} <br/> lng {this.props.markers[1]}</span>*/}
                     </Popup>
                 </Marker>

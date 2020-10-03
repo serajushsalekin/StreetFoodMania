@@ -1,6 +1,6 @@
 import { FETCH_STALL_REQUEST, FETCH_STALL_SUCCESS, FETCH_STALL, FETCH_STALL_FAILURE} from './stallTypes'
-import axios from 'axios'
-import {fetchStallUrl} from "../api";
+import api from "../api";
+
 
 export const fetchStallRequest = () => {
     return{
@@ -32,7 +32,7 @@ export const fetchStallFailure = error => {
 export const fetchStalls = () => {
     return async (dispatch) => {
         await dispatch(fetchStallRequest())
-        await axios.get(fetchStallUrl)
+        await api.get('/stalls')
             .then(res => {
                 const stalls = res.data.map(stall=> stall)
                 dispatch(fetchStallSuccess(stalls))
@@ -43,7 +43,7 @@ export const fetchStalls = () => {
 export const fetchStallDetail = id => {
     return async (dispatch) => {
         await dispatch(fetchStallRequest())
-        await axios.get(`${fetchStallUrl}${id}`)
+        await api.get(`/stalls/${id}`)
             .then( res => {
                 const stall = res.data
                 dispatch(fetchStall(stall))

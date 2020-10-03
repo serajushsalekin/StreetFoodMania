@@ -3,8 +3,7 @@ import {fetchStallDetail} from "../redux/stall/stallAction";
 import {connect} from "react-redux"
 import MyMap from "./map";
 import {Link, withRouter} from "react-router-dom"
-import axios from 'axios'
-import {fetchStallUrl} from "../redux/api"
+import api from '../redux/api'
 
 
 class Stall extends Component{
@@ -15,7 +14,7 @@ class Stall extends Component{
     }
     deleteItem = (e, id) => {
         e.preventDefault()
-        axios.delete(`${fetchStallUrl}${id}`).then(res => {
+        api.delete(`/stalls/${id}`).then(res => {
             if (res.status === 200) return this.props.history.push(`/stalls/`)
         }).catch(err => err)
 
@@ -23,6 +22,8 @@ class Stall extends Component{
 
     render() {
         const {stall: items} = this.props.stall
+        const { authenticate } = this.props.auth
+        console.log(authenticate)
         return (
 
             items.loc_?
@@ -32,8 +33,11 @@ class Stall extends Component{
                     </h3> :
             <div className='container'>
                 <div className='container'>
-                    <Link className='btn btn-primary' style={{marginBottom: "8px"}} to={`edit/${items._id}`}>Edit</Link>
-                    <button
+                    {authenticate ?
+                        <div>
+                        <Link className='btn btn-primary' style={{marginBottom: "8px"}}
+                              to={`edit/${items._id}`}>Edit</Link>
+                        <button
                         className='btn btn-danger'
                         style={{float: "right", marginBottom: "8px"}}
                         onClick={(e) => { if (window.confirm('Are you sure you wish to delete this item?')) this.deleteItem(e, items._id) } }
@@ -41,6 +45,8 @@ class Stall extends Component{
                     >
                         Remove
                     </button>
+                        </div>
+                        : ''}
                     <MyMap
                         loc={[items.loc_.coordinates[1], items.loc_.coordinates[0]]}
                         //markers={this.state.markers}
@@ -55,7 +61,8 @@ class Stall extends Component{
     }
 }
 const mapStateToProps = state => ({
-    stall: state.stalls
+    stall: state.stalls,
+    auth: state.auth
 })
 const mapDispatchToProps = dispatch => {
     return {

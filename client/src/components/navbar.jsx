@@ -25,7 +25,7 @@ const Navbar = () => {
                                 <li><Link to="#">Page 1-3</Link></li>
                             </ul>
                         </li>
-                        <li><Link to='#'>Sign In</Link></li>
+                        <li><Link to='/login'>Sign In</Link></li>
                     </ul>
                 </div>
             </div>
