@@ -15,7 +15,7 @@ const stallRouter = require('./routes/stalls')
 const cors = require("./routes/cors");
 
 // db
-const url = "mongodb://localhost:27017/food_db"
+const url = `mongodb+srv://${process.env.usr}:${process.env.pass}@mongocluster.2ulz8.mongodb.net/${process.env.dbname}?retryWrites=true&w=majority`
 const connect = mongoose.connect(url, {useNewUrlParser: true, useFindAndModify: false, useUnifiedTopology: true, useCreateIndex: true})
 connect.then(db => console.log("Connected to db successfully")).catch(err=> console.log(err))
 
